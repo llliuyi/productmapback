@@ -28,6 +28,7 @@ def getproduct():
             'id':x.id,
             "productname":x.productname,
             "position":x.position,
+            "rank":x.rank,
             "company":x.company,
             "type":x.type,
             "firsttime":firsttime2,
@@ -36,7 +37,8 @@ def getproduct():
             "info":x.info,
             "gzh":x.gzh,
             "xcx":x.xcx,
-            "cloudfirm":x.cloudfirm
+            "cloudfirm":x.cloudfirm,
+            "tencent":x.tencent
         }
         # print(xmessage)
         messagelist.append(xmessage)
@@ -60,6 +62,7 @@ def addproduct():
             newtime1 = datetime.strptime(newtime, "%Y-%m-%d")
         newproductinfo = Product(productname=params['productname']
                                  ,position=params['position']
+                                 ,rank = params['rank']
                                  ,company=params['company']
                                  ,type=params['type'],
                                  firsttime=firsttime1
@@ -68,7 +71,7 @@ def addproduct():
                                  ,info=params['info']
                                  ,gzh=params['gzh'],
                                  xcx=params['xcx']
-                                 ,cloudfirm=params['cloudfirm'])
+                                 ,cloudfirm=params['cloudfirm'],tencent=params['tencent'])
         # print(newproductinfo)
         # for i in params.keys():
         #     setattr(newproductinfo,i,params[i])
@@ -91,6 +94,7 @@ def modifyproduct():
         id = params['id']
         productname = params['productname']
         position = params['position']
+        rank = params ['rank']
         company = params['company']
         type = params['type']
         firsttime = params['firsttime']
@@ -100,6 +104,7 @@ def modifyproduct():
         gzh = params['gzh']
         xcx = params['xcx']
         cloudfirm = params['cloudfirm']
+        tencent = params['tencent']
     except:
         return make_response(errormessage("参数缺失"))
     product = Product.query.get(id)
@@ -108,6 +113,7 @@ def modifyproduct():
     try:
         product.productname = productname
         product.position = position
+        product.rank = rank
         product.company = company
         product.type = type
         product.firsttime = firsttime
@@ -117,6 +123,7 @@ def modifyproduct():
         product.gzh =gzh
         product.xcx = xcx
         product.cloudfirm = cloudfirm
+        product.tencent = tencent
         db.session.commit()
         return make_response(successmessage('修改成功'))
     except:
@@ -130,7 +137,7 @@ def deleteproduct():
     try:
         id = params['id']
     except:
-        return  make_response(errormessage("参数缺失"))
+        return make_response(errormessage("参数缺失"))
     if len(str(id)) == 0:
         return make_response(errormessage("请选择要删除的客户信息"))
     product = Product.query.get(id)

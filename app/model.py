@@ -7,6 +7,7 @@ class Product(db.Model):
     id = db.Column(db.INTEGER,primary_key=True, unique = True, autoincrement = True, nullable = False)
     productname = db.Column(db.String(80))
     position = db.Column(db.String(100))
+    rank = db.Column(db.String(80))
     company = db.Column(db.String(80))
     type = db.Column(db.String(80))
     firsttime = db.Column(db.Date)
@@ -16,3 +17,4 @@ class Product(db.Model):
     gzh = db.Column(db.String(255))
     xcx = db.Column(db.String(255))
     cloudfirm = db.Column(db.String(255))
+    tencent = db.Column(db.String(255))
